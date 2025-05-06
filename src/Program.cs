@@ -18,10 +18,9 @@ if (sumoTerms == null)
 }
 else
 {
-	if (sumoTerms.Terms != null)
-		foreach (var (key, value) in sumoTerms.Terms)
-		{
-			Console.WriteLine(key + ": " + value);
-		}
+	foreach (var (key, value) in sumoTerms.Terms)
+	{
+		Console.WriteLine(key + ": " + value);
+	}
 }
 

@@ -1,6 +1,3 @@
 namespace sumohelp;
 
-public class SumoTerms
-{
-	public Dictionary<string, string>? Terms { get; init; }
-}
+public record SumoTerms(IDictionary<string, string> Terms);
