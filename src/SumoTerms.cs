@@ -20,4 +20,14 @@ class SumoTermLoader
 
 		terms = JsonSerializer.Deserialize<SumoTerms>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
 	}
+
+	public string? FindExact(string term)
+	{
+		if (terms == null)
+		{
+			throw new InvalidOperationException("Terms not loaded.");
+		}
+
+		return terms.Terms.TryGetValue(term, out var definition) ? definition : null;
+	}
 }

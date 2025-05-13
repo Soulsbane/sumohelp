@@ -24,3 +24,15 @@ else
 	}
 }
 
+var termLoader = new sumohelp.SumoTermLoader();
+termLoader.Load("data/terms.json");
+var definition = termLoader.FindExact("yokozuna");
+
+if (definition != null)
+{
+	Console.WriteLine($"Definition of Yokozuna: {definition}");
+}
+else
+{
+	Console.WriteLine("Term not found.");
+}
