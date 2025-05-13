@@ -6,7 +6,7 @@ public record SumoTerms(IDictionary<string, string> Terms);
 
 class SumoTermLoader
 {
-	private SumoTerms? terms;
+	private SumoTerms? _terms;
 
 	public void Load(string jsonFilePath)
 	{
@@ -18,16 +18,16 @@ class SumoTermLoader
 			AllowTrailingCommas = true
 		};
 
-		terms = JsonSerializer.Deserialize<SumoTerms>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
+		_terms = JsonSerializer.Deserialize<SumoTerms>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
 	}
 
 	public string? FindExact(string term)
 	{
-		if (terms == null)
+		if (_terms == null)
 		{
 			throw new InvalidOperationException("Terms not loaded.");
 		}
 
-		return terms.Terms.TryGetValue(term, out var definition) ? definition : null;
+		return _terms.Terms.TryGetValue(term, out var definition) ? definition : null;
 	}
 }
