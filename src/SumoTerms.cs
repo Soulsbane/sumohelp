@@ -7,7 +7,7 @@ public record SumoTerms(IDictionary<string, string> Terms);
 
 class SumoTermLoader
 {
-	private SumoTerms? _terms;
+	private readonly SumoTerms? _terms;
 
 	public SumoTermLoader()
 	{
