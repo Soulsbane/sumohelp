@@ -11,7 +11,6 @@ else
 
 var termLoader = new SumoHelp.SumoTermLoader();
 
-termLoader.Load();
 string? definition = termLoader.FindExact("yokozuna");
 
 if (definition != null)

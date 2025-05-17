@@ -9,7 +9,7 @@ class SumoTermLoader
 {
 	private SumoTerms? _terms;
 
-	public void Load()
+	public SumoTermLoader()
 	{
 		var options = new JsonSerializerOptions
 		{
