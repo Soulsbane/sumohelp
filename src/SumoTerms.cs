@@ -1,6 +1,7 @@
-using System.Text.Json;
+namespace SumoHelp;
+using System.Reflection;
 
-namespace sumohelp;
+using System.Text.Json;
 
 public record SumoTerms(IDictionary<string, string> Terms);
 
@@ -8,15 +9,18 @@ class SumoTermLoader
 {
 	private SumoTerms? _terms;
 
-	public void Load(string jsonFilePath)
+	public void Load()
 	{
-		using var stream = new FileStream(jsonFilePath, FileMode.Open, FileAccess.Read);
 		var options = new JsonSerializerOptions
 		{
 			PropertyNameCaseInsensitive = true,
 			ReadCommentHandling = JsonCommentHandling.Skip,
 			AllowTrailingCommas = true
 		};
+
+		using var stream = Assembly
+			.GetExecutingAssembly()
+			.GetManifestResourceStream("SumoHelp.data.terms.json")!;
 
 		_terms = JsonSerializer.Deserialize<SumoTerms>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
 	}
