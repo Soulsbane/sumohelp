@@ -34,4 +34,16 @@ class SumoTermLoader
 
 		return _terms.Terms.TryGetValue(term, out var definition) ? definition : null;
 	}
+
+	public Dictionary<string, string> FindAll(string termToFind)
+	{
+		if (_terms == null)
+		{
+			throw new InvalidOperationException("Terms not loaded.");
+		}
+
+		return _terms.Terms
+			.Where(kvp => kvp.Key.StartsWith(termToFind, StringComparison.OrdinalIgnoreCase))
+			.ToDictionary();
+	}
 }

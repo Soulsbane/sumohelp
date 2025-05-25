@@ -1,4 +1,6 @@
 ﻿
+using Spectre.Console;
+
 if (args.Length > 0)
 {
 	GetTerm(args[0]);
@@ -20,5 +22,19 @@ void GetTerm(string termToFind)
 	else
 	{
 		Console.WriteLine("Term not found.");
+		var searchResults = termLoader.FindAll(termToFind);
+
+		if (searchResults.Count > 0)
+		{
+			var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
+				.Title("No exact match found. Do you want to search for similar terms?")
+				.AddChoices(searchResults.Keys));
+
+			 	Console.WriteLine($"{searchResults[choice]}");
+		}
+		else
+		{
+			Console.WriteLine("No similar terms found.");
+		}
 	}
 }
