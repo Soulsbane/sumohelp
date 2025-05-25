@@ -32,7 +32,7 @@ class SumoTermLoader
 			throw new InvalidOperationException("Terms not loaded.");
 		}
 
-		return _terms.Terms.TryGetValue(term, out var definition) ? definition : null;
+		return _terms.Terms.TryGetValue(term.ToLower(), out var definition) ? definition : null;
 	}
 
 	public Dictionary<string, string> FindAll(string termToFind)
