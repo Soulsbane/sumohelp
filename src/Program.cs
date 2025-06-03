@@ -21,7 +21,6 @@ void GetTerm(string termToFind)
 	}
 	else
 	{
-		Console.WriteLine("Term not found.");
 		var searchResults = termLoader.FindAll(termToFind);
 
 		if (searchResults.Count > 0)
