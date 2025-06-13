@@ -11,7 +11,7 @@ app.Configure(config =>
 {
 	config.AddCommand<ListCommand>("list")
 		.WithDescription("List all the terms from the local help term database")
-		.WithExample(new[] { "list", "term" });
+		.WithExample("list", "term");
 });
 
 try
@@ -86,7 +86,28 @@ public class ListCommand : Command<ListCommandSettings>
 {
 	public override int Execute(CommandContext context, ListCommandSettings settings)
 	{
-		Console.WriteLine("LISTING.");
+		var termLoader = new SumoHelp.SumoTermLoader();
+		var allTerms = termLoader.GetAll();
+
+		if (allTerms.Count == 0)
+		{
+			Console.WriteLine("No terms found in the database.");
+			return 0;
+		}
+
+		var table = new Table();
+
+		table.ShowRowSeparators();
+		table.AddColumn("Term");
+		table.AddColumn("Description");
+
+		foreach (var term in allTerms)
+		{
+			table.AddRow(term.Key, term.Value);
+		}
+
+		AnsiConsole.Write(table);
+
 		return 0;
 	}
 }

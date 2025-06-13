@@ -46,4 +46,14 @@ class SumoTermLoader
 			.Where(kvp => kvp.Key.StartsWith(termToFind, StringComparison.OrdinalIgnoreCase))
 			.ToDictionary();
 	}
+
+	public IDictionary<string, string> GetAll()
+	{
+		if (_terms == null)
+		{
+			throw new InvalidOperationException("Terms not loaded.");
+		}
+
+		return _terms.Terms;
+	}
 }
