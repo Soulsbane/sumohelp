@@ -25,9 +25,9 @@ class SumoTermLoader
 		_sumoTerms = JsonSerializer.Deserialize<Dictionary<string, string>>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
 	}
 
-	public string? FindExact(string term)
+	public string FindExact(string term)
 	{
-		return _sumoTerms.TryGetValue(term.ToLower(), out var definition) ? definition : null;
+		return _sumoTerms.GetValueOrDefault(term.ToLower(), "");
 	}
 
 	public Dictionary<string, string> FindAll(string termToFind)
