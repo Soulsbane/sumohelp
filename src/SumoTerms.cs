@@ -3,11 +3,9 @@ using System.Reflection;
 
 using System.Text.Json;
 
-public record SumoTerms(IDictionary<string, string> Terms);
-
 class SumoTermLoader
 {
-	private readonly SumoTerms? _terms;
+	private Dictionary<string, string> _sumoTerms;
 
 	public SumoTermLoader()
 	{
@@ -18,42 +16,29 @@ class SumoTermLoader
 			AllowTrailingCommas = true
 		};
 
+		_sumoTerms = new Dictionary<string, string>();
+
 		using var stream = Assembly
 			.GetExecutingAssembly()
 			.GetManifestResourceStream("SumoHelp.data.terms.json")!;
 
-		_terms = JsonSerializer.Deserialize<SumoTerms>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
+		_sumoTerms = JsonSerializer.Deserialize<Dictionary<string, string>>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
 	}
 
 	public string? FindExact(string term)
 	{
-		if (_terms == null)
-		{
-			throw new InvalidOperationException("Terms not loaded.");
-		}
-
-		return _terms.Terms.TryGetValue(term.ToLower(), out var definition) ? definition : null;
+		return _sumoTerms.TryGetValue(term.ToLower(), out var definition) ? definition : null;
 	}
 
 	public Dictionary<string, string> FindAll(string termToFind)
 	{
-		if (_terms == null)
-		{
-			throw new InvalidOperationException("Terms not loaded.");
-		}
-
-		return _terms.Terms
+		return _sumoTerms
 			.Where(kvp => kvp.Key.StartsWith(termToFind, StringComparison.OrdinalIgnoreCase))
 			.ToDictionary();
 	}
 
-	public IDictionary<string, string> GetAll()
+	public Dictionary<string, string> GetAll()
 	{
-		if (_terms == null)
-		{
-			throw new InvalidOperationException("Terms not loaded.");
-		}
-
-		return _terms.Terms;
+		return _sumoTerms;
 	}
 }
