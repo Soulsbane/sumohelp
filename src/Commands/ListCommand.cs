@@ -1,15 +1,12 @@
-using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace SumoHelp.Commands;
 
-[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class ListCommandSettings : CommandSettings
 {
 }
 
-[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class ListCommand : Command<ListCommandSettings>
 {
 	public override int Execute(CommandContext context, ListCommandSettings settings)

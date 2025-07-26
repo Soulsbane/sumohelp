@@ -1,6 +1,5 @@
 ﻿
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using SumoHelp.Commands;
@@ -25,7 +24,6 @@ catch (Exception ex)
 	return -1;
 }
 
-[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class GetTermCommandSettings : CommandSettings
 {
 	[Description("Term to search for in the terms database")]
@@ -33,7 +31,6 @@ public class GetTermCommandSettings : CommandSettings
 	public string? Term { get; init; } = string.Empty;
 }
 
-[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class GetTermCommand : Command<GetTermCommandSettings>
 {
 	void GetTerm(string termToFind)
