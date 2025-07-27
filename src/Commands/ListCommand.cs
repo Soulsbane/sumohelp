@@ -1,7 +1,7 @@
+namespace SumoHelp.Commands;
+
 using Spectre.Console;
 using Spectre.Console.Cli;
-
-namespace SumoHelp.Commands;
 
 public class ListCommandSettings : CommandSettings
 {
