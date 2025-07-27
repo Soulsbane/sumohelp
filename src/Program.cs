@@ -48,11 +48,18 @@ public class GetTermCommand : Command<GetTermCommandSettings>
 
 			if (searchResults.Count > 0)
 			{
-				var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
-					.Title("No exact match found. Do you want to search for similar terms?")
-					.AddChoices(searchResults.Keys));
+				if (searchResults.Count == 1)
+				{
+					Console.WriteLine($"{searchResults.First().Value}");
+				}
+				else
+				{
+					var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
+						.Title("No exact match found. Do you want to search for similar terms?")
+						.AddChoices(searchResults.Keys));
 
-				Console.WriteLine($"{searchResults[choice]}");
+					Console.WriteLine($"{searchResults[choice]}");
+				}
 			}
 			else
 			{
