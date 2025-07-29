@@ -10,6 +10,8 @@ app.Configure(config =>
 	config.AddCommand<ListCommand>("list")
 		.WithDescription("List all the terms from the local help term database")
 		.WithExample("list", "term");
+
+	config.AddCommand<UpdateCommand>("update");
 });
 
 try
