@@ -8,8 +8,7 @@ var app = new CommandApp<GetTermCommand>();
 app.Configure(config =>
 {
 	config.AddCommand<ListCommand>("list")
-		.WithDescription("List all the terms from the local help term database")
-		.WithExample("list", "term");
+		.WithDescription("List all the terms from the local help term database");
 
 	config.AddCommand<UpdateCommand>("update");
 });
