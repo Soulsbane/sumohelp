@@ -20,7 +20,7 @@ public class GetTermCommand : Command<GetTermCommandSettings>
 
 		if (definition != string.Empty)
 		{
-			Console.WriteLine($"Definition for {termToFind} is: {definition}");
+			Console.WriteLine($"{termToFind} - {definition}");
 		}
 		else
 		{
@@ -30,7 +30,7 @@ public class GetTermCommand : Command<GetTermCommandSettings>
 			{
 				if (searchResults.Count == 1)
 				{
-					Console.WriteLine($"{searchResults.First().Value}");
+					Console.WriteLine($"{searchResults.First().Key} - {searchResults.First().Value}");
 				}
 				else
 				{
@@ -38,7 +38,7 @@ public class GetTermCommand : Command<GetTermCommandSettings>
 						.Title("No exact match found. Do you want to search for similar terms?")
 						.AddChoices(searchResults.Keys));
 
-					Console.WriteLine($"{searchResults[choice]}");
+					Console.WriteLine($"{choice} - {searchResults[choice]}");
 				}
 			}
 			else
