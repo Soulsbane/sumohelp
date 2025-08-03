@@ -16,7 +16,7 @@ class SumoTermLoader
 			AllowTrailingCommas = true
 		};
 
-		_sumoTerms = new Dictionary<string, string>();
+		_sumoTerms = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
 		using var stream = Assembly
 			.GetExecutingAssembly()
@@ -27,7 +27,7 @@ class SumoTermLoader
 
 	public string FindExact(string term)
 	{
-		return _sumoTerms.GetValueOrDefault(term.ToLower(), "");
+		return _sumoTerms.GetValueOrDefault(term, "");
 	}
 
 	public Dictionary<string, string> FindAll(string termToFind)
