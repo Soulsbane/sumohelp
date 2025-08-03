@@ -5,7 +5,7 @@ using System.Text.Json;
 
 class SumoTermLoader
 {
-	private Dictionary<string, string> _sumoTerms;
+	private readonly Dictionary<string, string> _sumoTerms;
 
 	public SumoTermLoader()
 	{
