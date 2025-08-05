@@ -1,3 +1,5 @@
+using SumoHelp.Core;
+
 namespace SumoHelp.Commands;
 
 using System.ComponentModel;
@@ -18,6 +20,30 @@ public class ListCommand : Command<ListCommandSettings>
 		if (settings.ListType == "all" || string.IsNullOrWhiteSpace(settings.ListType))
 		{
 			return ListAllTerms();
+		}
+
+		return ListByTerm(settings.ListType);
+	}
+
+	private int ListByTerm(string termToFind)
+	{
+		var termLoader = new SumoTermLoader();
+		var searchResults = termLoader.FindAll(termToFind);
+
+		if (searchResults.Count > 0)
+		{
+			if (searchResults.Count == 1)
+			{
+				Console.WriteLine($"{searchResults.First().Key} - {searchResults.First().Value}");
+			}
+			else
+			{
+				TableHelpers.OutputTable(searchResults);
+			}
+		}
+		else
+		{
+			Console.WriteLine($"No terms found matching '{termToFind}'.");
 		}
 
 		return 0;
