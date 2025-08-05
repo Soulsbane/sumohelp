@@ -60,19 +60,7 @@ public class ListCommand : Command<ListCommandSettings>
 			return 0;
 		}
 
-		var table = new Table();
-
-		table.ShowRowSeparators();
-		table.AddColumn("Term");
-		table.AddColumn("Description");
-
-		foreach (var term in allTerms)
-		{
-			table.AddRow(term.Key, term.Value);
-		}
-
-		AnsiConsole.Write(table);
-
+		TableHelpers.OutputTable(allTerms);
 		return 0;
 	}
 }
