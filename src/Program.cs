@@ -7,9 +7,7 @@ var app = new CommandApp<GetTermCommand>();
 
 app.Configure(config =>
 {
-	config.AddCommand<ListCommand>("list")
-		.WithDescription("List all the terms from the local help term database");
-
+	config.AddCommand<ListCommand>("list");
 	config.AddCommand<UpdateCommand>("update");
 });
 

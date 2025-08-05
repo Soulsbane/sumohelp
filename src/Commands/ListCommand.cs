@@ -8,11 +8,11 @@ using Spectre.Console.Cli;
 
 public class ListCommandSettings : CommandSettings
 {
-	[Description("List of terms to display from the local help term database. If not specified, all terms will be listed.")]
 	[CommandArgument(0, "[listType]")]
 	public string ListType { get; init; } = string.Empty;
 }
 
+[Description("List of terms to display from the local help term database. If not specified, all terms will be listed.")]
 public class ListCommand : Command<ListCommandSettings>
 {
 	public override int Execute(CommandContext context, ListCommandSettings settings)
