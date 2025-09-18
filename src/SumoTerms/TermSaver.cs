@@ -3,20 +3,9 @@ namespace SumoHelp.SumoTerms;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 
-class SumoTermSaver
+class SumoTermSaver(string companyName, string appName, string outputFileName)
+	: TermBase(companyName, appName, outputFileName)
 {
-	private readonly string _termsFilePath;
-	private readonly string _sumoHelpDir;
-
-	public SumoTermSaver(string companyName, string appName, string outputFileName)
-	{
-		DirectoryInfo userDir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-		_sumoHelpDir = Path.Combine(userDir.FullName, companyName, appName);
-		_termsFilePath = Path.Combine(_sumoHelpDir, outputFileName);
-	}
-
-	public string TermsFilePath => _termsFilePath;
-
 	public void Save(Dictionary<string, string> glossary)
 	{
 		var options = new JsonSerializerOptions
@@ -26,13 +15,13 @@ class SumoTermSaver
 
 		var json = JsonSerializer.Serialize(glossary, options);
 
-		if (!Directory.Exists(_sumoHelpDir))
+		if (!Directory.Exists(GetSumoHelpDir()))
 		{
-			Directory.CreateDirectory(_sumoHelpDir);
+			Directory.CreateDirectory(GetSumoHelpDir());
 		}
 
 		json = Regex.Unescape(json);
-		File.WriteAllText(_termsFilePath, json);
+		File.WriteAllText(GetTermsFilePath(), json);
 	}
 }
 

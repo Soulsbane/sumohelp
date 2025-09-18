@@ -18,9 +18,9 @@ public class UpdateCommand : Command<UpdateCommandSettings>
 
 		termSaver.Save(glossary);
 
-		if (File.Exists(termSaver.TermsFilePath))
+		if (File.Exists(termSaver.GetTermsFilePath()))
 		{
-			Console.WriteLine("Terms saved to " + termSaver.TermsFilePath);
+			Console.WriteLine("Terms saved to " + termSaver.GetTermsFilePath());
 		}
 
 		return 0;
