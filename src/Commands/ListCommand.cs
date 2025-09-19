@@ -27,7 +27,7 @@ public class ListCommand : Command<ListCommandSettings>
 
 	private int ListByTerm(string termToFind)
 	{
-		var termLoader = new SumoTermLoader();
+		var termLoader = new SumoTerms.SumoTermLoader();
 		var searchResults = termLoader.FindAll(termToFind);
 
 		if (searchResults.Count > 0)
@@ -51,7 +51,7 @@ public class ListCommand : Command<ListCommandSettings>
 
 	private int ListAllTerms()
 	{
-		var termLoader = new SumoTermLoader();
+		var termLoader = new SumoTerms.SumoTermLoader();
 		var allTerms = termLoader.GetAll();
 
 		if (allTerms.Count == 0)

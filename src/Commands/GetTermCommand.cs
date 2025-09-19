@@ -15,7 +15,7 @@ public class GetTermCommand : Command<GetTermCommandSettings>
 {
 	void GetTerm(string termToFind)
 	{
-		var termLoader = new SumoTermLoader();
+		var termLoader = new SumoTerms.SumoTermLoader();
 		string definition = termLoader.FindExact(termToFind);
 
 		if (definition != string.Empty)

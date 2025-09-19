@@ -1,4 +1,4 @@
-namespace SumoHelp;
+namespace SumoHelp.SumoTerms;
 using System.Reflection;
 
 using System.Text.Json;
@@ -42,3 +42,4 @@ class SumoTermLoader
 		return _sumoTerms;
 	}
 }
+
