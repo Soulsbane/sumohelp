@@ -3,8 +3,7 @@ namespace SumoHelp.SumoTerms;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 
-class SumoTermSaver(string companyName, string appName, string outputFileName)
-	: TermBase(companyName, appName, outputFileName)
+class SumoTermSaver : TermBase
 {
 	public void Save(Dictionary<string, string> glossary)
 	{

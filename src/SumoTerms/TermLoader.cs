@@ -3,7 +3,7 @@ using System.Reflection;
 
 using System.Text.Json;
 
-class SumoTermLoader
+class SumoTermLoader : TermBase
 {
 	private readonly Dictionary<string, string> _sumoTerms;
 

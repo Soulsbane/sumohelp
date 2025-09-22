@@ -11,10 +11,9 @@ public class UpdateCommand : Command<UpdateCommandSettings>
 {
 	public override int Execute(CommandContext context, UpdateCommandSettings settings)
 	{
-		const string url = "https://en.wikipedia.org/wiki/Glossary_of_sumo_terms";
 		SumoTermDownloader downloader = new SumoTermDownloader();
-		SumoTermSaver termSaver = new SumoTermSaver("Raijinsoft", "sumohelp", "terms.json");
-		var glossary = downloader.GetTerms(url);
+		SumoTermSaver termSaver = new SumoTermSaver();
+		var glossary = downloader.GetTerms(Constants.TermsUrl);
 
 		termSaver.Save(glossary);
 
