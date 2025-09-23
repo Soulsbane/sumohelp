@@ -5,24 +5,37 @@ using System.Text.Json;
 
 class SumoTermLoader : TermBase
 {
-	private readonly Dictionary<string, string> _sumoTerms;
+	private Dictionary<string, string> _sumoTerms;
 
 	public SumoTermLoader()
 	{
-		var options = new JsonSerializerOptions
-		{
-			PropertyNameCaseInsensitive = true,
-			ReadCommentHandling = JsonCommentHandling.Skip,
-			AllowTrailingCommas = true
-		};
-
 		_sumoTerms = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
+		if (UserTermFileExists())
+		{
+			LoadUserTerms();
+		}
+		else
+		{
+			LoadEmbeddedTerms();
+		}
+	}
+
+	private void  LoadEmbeddedTerms()
+	{
 		using var stream = Assembly
 			.GetExecutingAssembly()
 			.GetManifestResourceStream("SumoHelp.data.terms.json")!;
 
-		_sumoTerms = JsonSerializer.Deserialize<Dictionary<string, string>>(stream, options) ?? throw new InvalidOperationException("Failed to load terms.");
+		_sumoTerms = JsonSerializer.Deserialize<Dictionary<string, string>>(stream, Constants.JsonOptions) ??
+			throw new InvalidOperationException("Failed to load terms.");
+	}
+
+	private void LoadUserTerms()
+	{
+		var userTermsJson = File.ReadAllText(GetTermsFilePath());
+		_sumoTerms = JsonSerializer.Deserialize<Dictionary<string, string>>(userTermsJson, Constants.JsonOptions) ??
+			throw new InvalidOperationException("Failed to load terms.");
 	}
 
 	public string FindExact(string term)

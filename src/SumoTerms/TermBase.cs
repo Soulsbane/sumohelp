@@ -14,4 +14,5 @@ abstract class TermBase
 
 	public string GetTermsFilePath() => _termsFilePath;
 	protected string GetSumoHelpDir() => _sumoHelpDir;
+	protected bool UserTermFileExists() => File.Exists(_termsFilePath);
 }
