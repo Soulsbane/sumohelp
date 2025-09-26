@@ -15,7 +15,8 @@ static class Constants
 		{
 			PropertyNameCaseInsensitive = true,
 			ReadCommentHandling = JsonCommentHandling.Skip,
-			AllowTrailingCommas = true
+			AllowTrailingCommas = true,
+			WriteIndented = true
 		};
 	}
 }

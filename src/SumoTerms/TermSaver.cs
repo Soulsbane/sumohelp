@@ -7,12 +7,7 @@ class SumoTermSaver : TermBase
 {
 	public void Save(Dictionary<string, string> glossary)
 	{
-		var options = new JsonSerializerOptions
-		{
-			WriteIndented = true
-		};
-
-		var json = JsonSerializer.Serialize(glossary, options);
+		var json = JsonSerializer.Serialize(glossary, Constants.JsonOptions);
 
 		if (!Directory.Exists(GetSumoHelpDir()))
 		{
