@@ -49,17 +49,4 @@ class SumoTermDownloader
 
 		return text;
 	}
-
-	public void SaveToJson(Dictionary<string, string> glossary, string filePath)
-	{
-		var options = new JsonSerializerOptions
-		{
-			WriteIndented = true
-		};
-
-		var json = JsonSerializer.Serialize(glossary, options);
-
-		json = Regex.Unescape(json);
-		File.WriteAllText(filePath, json);
-	}
 }
