@@ -1,0 +1,18 @@
+# configuration file for dotnet-releaser
+[msbuild]
+project = "sumohelp.csproj"
+[github]
+user = "Soulsbane"
+repo = "sumohelp"
+
+# Default values used by `dotnet-releaser`
+[msbuild.properties]
+PublishTrimmed = false
+PublishSingleFile = true
+SelfContained = true
+PublishReadyToRun = true
+CopyOutputSymbolsToPublishDirectory = false
+SkipCopyingSymbolsToOutputDirectory = true
+PackAsTool = false
+[nuget]
+publish = false
