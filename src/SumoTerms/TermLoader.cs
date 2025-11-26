@@ -55,9 +55,9 @@ class SumoTermLoader : TermBase
 		return _sumoTerms;
 	}
 
-	public Add(string term, string definition)
+	public void Add(string term, string definition)
 	{
-		_sumoTerms[term] = definition;
+		_sumoTerms.Add(term, definition);
 	}
 }
 
