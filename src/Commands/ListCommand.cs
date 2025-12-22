@@ -3,7 +3,6 @@ using SumoHelp.Core;
 namespace SumoHelp.Commands;
 
 using System.ComponentModel;
-using Spectre.Console;
 using Spectre.Console.Cli;
 
 public class ListCommandSettings : CommandSettings
