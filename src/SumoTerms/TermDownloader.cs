@@ -3,12 +3,13 @@ namespace SumoHelp.SumoTerms;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using System.Text.Json;
+using System.Diagnostics.CodeAnalysis;
 
 class SumoTermDownloader
 {
 	private static readonly Regex BracketsRegex = new Regex(@"\[.*\]");
 
-	public Dictionary<string, string> GetTerms(string url)
+	public Dictionary<string, string> GetTerms([StringSyntax(StringSyntaxAttribute.Uri)] string url)
 	{
 		Dictionary<string, string> glossary = new Dictionary<string, string>();
 		HtmlWeb web = new HtmlWeb();
