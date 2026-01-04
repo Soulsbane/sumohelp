@@ -2,7 +2,6 @@ namespace SumoHelp.SumoTerms;
 
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using System.Text.Json;
 using System.Diagnostics.CodeAnalysis;
 
 class SumoTermDownloader
