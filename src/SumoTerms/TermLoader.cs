@@ -1,9 +1,12 @@
+using Lua;
+
 namespace SumoHelp.SumoTerms;
 using System.Reflection;
 
 using System.Text.Json;
 
-class SumoTermLoader : TermBase
+[LuaObject]
+partial class SumoTermLoader : TermBase
 {
 	private Dictionary<string, string> _sumoTerms;
 
@@ -36,6 +39,12 @@ class SumoTermLoader : TermBase
 		var userTermsJson = File.ReadAllText(GetTermsFilePath());
 		_sumoTerms = JsonSerializer.Deserialize<Dictionary<string, string>>(userTermsJson, Constants.JsonOptions) ??
 			throw new InvalidOperationException("Failed to load terms.");
+	}
+
+	[LuaMember("AddTerm")]
+	public void AddTerm(string term, string definition)
+	{
+		_sumoTerms.Add(term, definition);
 	}
 
 	public string FindExact(string term)
