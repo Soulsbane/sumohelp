@@ -4,6 +4,7 @@ namespace SumoHelp.Commands;
 
 using System.ComponentModel;
 using Spectre.Console.Cli;
+using Addons;
 
 public class ListCommandSettings : CommandSettings
 {
@@ -26,6 +27,9 @@ public class ListCommand : Command<ListCommandSettings>
 
 	private int ListByTerm(string termToFind)
 	{
+		var manager = new LuaAddonManager();
+		manager.LoadAddons();
+
 		var termLoader = new SumoTerms.SumoTermLoader();
 		var searchResults = termLoader.FindAll(termToFind);
 

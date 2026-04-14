@@ -18,6 +18,12 @@ class LuaAddon
 		_state.OpenStandardLibraries();
 	}
 
+	public void AddApi(string name, ILuaApi api)
+	{
+		LuaValue value = LuaValue.FromObject(api.GetInterface());
+		_state.Environment[name] = value;
+	}
+
 	public ValueTask<LuaValue[]>CallFunc(string functionName, ReadOnlySpan<LuaValue> args = default)
 	{
 		if (_state.Environment.ContainsKey(functionName))
@@ -47,6 +53,22 @@ class LuaAddon
 
 	public void DoFile(string filePath)
 	{
-		_state.DoFileAsync(filePath);
+		Console.WriteLine($"Executing Lua file: {filePath}");
+		try
+		{
+			_state.DoFileAsync(filePath);
+		}
+		catch (LuaParseException)
+		{
+			Console.WriteLine("Error parsing Lua script.");
+		}
+		catch (LuaRuntimeException)
+		{
+			Console.WriteLine("Error Running Lua script.");
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+		}
 	}
 }
