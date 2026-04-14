@@ -68,5 +68,10 @@ partial class SumoTermLoader : TermBase, ILuaApi
 	{
 		return _sumoTerms;
 	}
+
+	public void Add(string term, string definition)
+	{
+		_sumoTerms.Add(term, definition);
+	}
 }
 
