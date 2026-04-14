@@ -1,4 +1,5 @@
 using Lua;
+using SumoHelp.Addons;
 
 namespace SumoHelp.SumoTerms;
 using System.Reflection;
@@ -6,9 +7,12 @@ using System.Reflection;
 using System.Text.Json;
 
 [LuaObject]
-partial class SumoTermLoader : TermBase
+partial class SumoTermLoader : TermBase, ILuaApi
 {
 	private Dictionary<string, string> _sumoTerms;
+
+	public ILuaApi GetInterface() => this;
+	public string GetName() => "TermAPI";
 
 	public SumoTermLoader()
 	{
@@ -47,6 +51,7 @@ partial class SumoTermLoader : TermBase
 		_sumoTerms.Add(term, definition);
 	}
 
+	[LuaMember("FindExact")]
 	public string FindExact(string term)
 	{
 		return _sumoTerms.GetValueOrDefault(term, "");
