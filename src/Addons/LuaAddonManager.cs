@@ -48,6 +48,7 @@ class LuaAddonManager
 				addon.AddApi("TermLoader", new SumoTermLoader());
 				_addons.Add(addon);
 				addon.DoFile(luaFile);
+				addon.CallFunc("OnInitialize");
 
 			}
 		}

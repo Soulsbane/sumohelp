@@ -58,7 +58,6 @@ class LuaAddon
 		try
 		{
 			_state.DoFileAsync(filePath);
-			CallFunc("OnInitialize");
 		}
 		catch (LuaParseException)
 		{
