@@ -30,6 +30,12 @@ class LuaAddonManager
 	{
 		LoadUserDirAddons();
 		LoadZippedAddons();
+		CallOnInitialize();
+	}
+
+	private void CallOnInitialize()
+	{
+		_addons.ForEach(addon => addon.CallFunc("OnInitialize"));
 	}
 
 	private void LoadUserDirAddons()
@@ -58,8 +64,6 @@ class LuaAddonManager
 				addon.AddApi("TermLoader", new SumoTermLoader());
 				_addons.Add(addon);
 				addon.DoFile(luaFile);
-				addon.CallFunc("OnInitialize");
-
 			}
 		}
 	}
