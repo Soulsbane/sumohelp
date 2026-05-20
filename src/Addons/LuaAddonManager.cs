@@ -73,16 +73,13 @@ class LuaAddonManager
 
 			foreach (string addonFile in addonFiles)
 			{
-				using (var file = File.OpenRead(addonFile))
-				using (var zip = new ZipArchive(file, ZipArchiveMode.Read))
+				using var file = File.OpenRead(addonFile);
+				using var zip = new ZipArchive(file, ZipArchiveMode.Read);
+
+				foreach (var entry in zip.Entries)
 				{
-					foreach (var entry in zip.Entries)
-					{
-						using (StreamReader stream = new StreamReader(entry.Open()))
-						{
-							Console.WriteLine(stream.ReadToEnd());
-						}
-					}
+					using StreamReader stream = new StreamReader(entry.Open());
+					Console.WriteLine(stream.ReadToEnd());
 				}
 			}
 		}
