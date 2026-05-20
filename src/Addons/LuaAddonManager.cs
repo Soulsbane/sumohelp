@@ -1,5 +1,9 @@
 namespace SumoHelp.Addons;
-using Lua;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 
 using SumoTerms;
 
@@ -23,6 +27,12 @@ class LuaAddonManager
 	}
 
 	public void LoadAddons()
+	{
+		LoadUserDirAddons();
+		LoadZippedAddons();
+	}
+
+	private void LoadUserDirAddons()
 	{
 		if (!Directory.Exists(_addonsDir))
 		{
@@ -50,6 +60,30 @@ class LuaAddonManager
 				addon.DoFile(luaFile);
 				addon.CallFunc("OnInitialize");
 
+			}
+		}
+	}
+
+	private  void LoadZippedAddons()
+	{
+		if (Directory.Exists(_addonsDir))
+		{
+			List<string> addonFiles= new List<string>(Directory.EnumerateFiles(_addonsDir));
+			Console.WriteLine($"Found {addonFiles.Count} addon archives in {_addonsDir}.");
+
+			foreach (string addonFile in addonFiles)
+			{
+				using (var file = File.OpenRead(addonFile))
+				using (var zip = new ZipArchive(file, ZipArchiveMode.Read))
+				{
+					foreach (var entry in zip.Entries)
+					{
+						using (StreamReader stream = new StreamReader(entry.Open()))
+						{
+							Console.WriteLine(stream.ReadToEnd());
+						}
+					}
+				}
 			}
 		}
 	}
