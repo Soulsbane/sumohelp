@@ -21,7 +21,7 @@ class LuaAddonManager
 		_apis = new Dictionary<string, ILuaApi>(StringComparer.OrdinalIgnoreCase);
 	}
 
-	public void AddApi(string name, ILuaApi api)
+	private void AddApi(string name, ILuaApi api)
 	{
 		_apis.Add(name, api);
 	}
