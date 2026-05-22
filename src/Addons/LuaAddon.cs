@@ -8,7 +8,7 @@ using Lua.Standard;
 
 class LuaAddon
 {
-	LuaState _state;
+	readonly LuaState _state;
 	public LuaState State => _state;
 
 	public LuaValue this [string memberName]
