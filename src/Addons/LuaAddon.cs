@@ -1,5 +1,8 @@
 namespace SumoHelp.Addons;
 
+using System;
+using System.Threading.Tasks;
+
 using Lua;
 using Lua.Standard;
 
