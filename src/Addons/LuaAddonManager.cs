@@ -1,3 +1,5 @@
+using Lua.Standard;
+
 namespace SumoHelp.Addons;
 
 using System;
@@ -10,7 +12,7 @@ using SumoTerms;
 class LuaAddonManager
 {
 	private readonly string _addonsDir;
-	 List<LuaAddon>_addons = new List<LuaAddon>();
+	readonly List<LuaAddon>_addons = new List<LuaAddon>();
 
 	private readonly Dictionary<string, ILuaApi> _apis;
 
@@ -35,6 +37,7 @@ class LuaAddonManager
 
 	private void CallOnInitialize()
 	{
+		_addons.ForEach(addon => addon.State.OpenStandardLibraries());
 		_addons.ForEach(addon => addon.CallFunc("OnInitialize"));
 	}
 
