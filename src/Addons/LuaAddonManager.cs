@@ -61,7 +61,6 @@ class LuaAddonManager
 
 			foreach (string luaFile in luaFiles)
 			{
-				var termLoader = new SumoTermLoader();
 				LuaAddon addon = new LuaAddon();
 
 				addon.AddApi("TermLoader", new SumoTermLoader());

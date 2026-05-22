@@ -31,7 +31,6 @@ class LuaAddon
 	{
 		if (_state.Environment.ContainsKey(functionName))
 		{
-			// var func = _state.Environment[functionName].Read<LuaFunction>();
 			var func = _state.Environment[functionName];
 
 			if (args.IsEmpty)
