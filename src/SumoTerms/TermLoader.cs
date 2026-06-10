@@ -1,10 +1,10 @@
+namespace SumoHelp.SumoTerms;
+
 using System.Reflection;
 using System.Text.Json;
 using Lua;
-using SumoHelp.Addons;
-using SumoHelp.Core;
-
-namespace SumoHelp.SumoTerms;
+using Addons;
+using Core;
 
 [LuaObject]
 internal partial class SumoTermLoader : ILuaApi
