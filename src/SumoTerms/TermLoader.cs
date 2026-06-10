@@ -2,11 +2,12 @@ using System.Reflection;
 using System.Text.Json;
 using Lua;
 using SumoHelp.Addons;
+using SumoHelp.Core;
 
 namespace SumoHelp.SumoTerms;
 
 [LuaObject]
-internal partial class SumoTermLoader : TermBase, ILuaApi
+internal partial class SumoTermLoader : ILuaApi
 {
 	private Dictionary<string, string> _sumoTerms;
 
@@ -14,7 +15,7 @@ internal partial class SumoTermLoader : TermBase, ILuaApi
 	{
 		_sumoTerms = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-		if (UserTermFileExists())
+		if (UserDataPaths.Instance.UserTermFileExists())
 			LoadUserTerms();
 		else
 			LoadEmbeddedTerms();
@@ -42,7 +43,7 @@ internal partial class SumoTermLoader : TermBase, ILuaApi
 
 	private void LoadUserTerms()
 	{
-		var userTermsJson = File.ReadAllText(GetTermsFilePath());
+		var userTermsJson = File.ReadAllText(UserDataPaths.Instance.GetTermsFilePath());
 		_sumoTerms = JsonSerializer.Deserialize<Dictionary<string, string>>(userTermsJson, Constants.JsonOptions) ??
 		             throw new InvalidOperationException("Failed to load terms.");
 	}
