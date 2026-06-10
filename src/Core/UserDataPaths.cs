@@ -17,7 +17,7 @@ public sealed class UserDataPaths
 		_termsFilePath = Path.Combine(_sumoHelpDir, Constants.OutputFileName);
 	}
 
-	public string GetTermsFileDir() => _termsFilePath;
-	public string GetSumoHelpDir() => _sumoHelpDir;
+	public string GetTermsFilePath() => _termsFilePath;
+	public string GetSumoHelpPath() => _sumoHelpDir;
 	public bool UserTermFileExists() => File.Exists(_termsFilePath);
 }
