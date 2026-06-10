@@ -3,6 +3,7 @@ namespace SumoHelp.Commands;
 using System.ComponentModel;
 using Spectre.Console.Cli;
 using SumoTerms;
+using Core;
 
 public class UpdateCommandSettings : CommandSettings;
 
@@ -17,9 +18,9 @@ public class UpdateCommand : Command<UpdateCommandSettings>
 
 		termSaver.Save(glossary);
 
-		if (File.Exists(termSaver.GetTermsFilePath()))
+		if (File.Exists(UserDataPaths.Instance.GetTermsFilePath()))
 		{
-			Console.WriteLine("Terms saved to " + termSaver.GetTermsFilePath());
+			Console.WriteLine("Terms saved to " + UserDataPaths.Instance.GetTermsFilePath());
 		}
 
 		return 0;
