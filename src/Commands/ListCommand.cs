@@ -1,15 +1,13 @@
-using SumoHelp.Core;
-
 namespace SumoHelp.Commands;
 
 using System.ComponentModel;
 using Spectre.Console.Cli;
 using Addons;
+using Core;
 
 public class ListCommandSettings : CommandSettings
 {
-	[CommandArgument(0, "[listType]")]
-	public string ListType { get; init; } = string.Empty;
+	[CommandArgument(0, "[listType]")] public string ListType { get; init; } = string.Empty;
 }
 
 [Description("List of terms to display from the local help term database. If not specified, all terms will be listed.")]

@@ -1,18 +1,16 @@
-using Lua.Standard;
-
 namespace SumoHelp.Addons;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-
+using Lua.Standard;
 using SumoTerms;
 
 class LuaAddonManager
 {
 	private readonly string _addonsDir;
-	readonly List<LuaAddon>_addons = new List<LuaAddon>();
+	readonly List<LuaAddon> _addons = new List<LuaAddon>();
 
 	private readonly Dictionary<string, ILuaApi> _apis;
 
@@ -55,7 +53,7 @@ class LuaAddonManager
 		Console.WriteLine($"Found {dirs.Count} addon directories.");
 		AddApi("TermLoader", new SumoTermLoader());
 
-		foreach(string dir in dirs)
+		foreach (string dir in dirs)
 		{
 			string[] luaFiles = Directory.GetFiles(dir, "*.lua");
 
@@ -70,11 +68,11 @@ class LuaAddonManager
 		}
 	}
 
-	private  void LoadZippedAddons()
+	private void LoadZippedAddons()
 	{
 		if (Directory.Exists(_addonsDir))
 		{
-			List<string> addonFiles= new List<string>(Directory.EnumerateFiles(_addonsDir));
+			List<string> addonFiles = new List<string>(Directory.EnumerateFiles(_addonsDir));
 			Console.WriteLine($"Found {addonFiles.Count} addon archives in {_addonsDir}.");
 
 			foreach (string addonFile in addonFiles)
@@ -90,6 +88,4 @@ class LuaAddonManager
 			}
 		}
 	}
-
-
 }
