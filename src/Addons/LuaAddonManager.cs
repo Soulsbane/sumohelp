@@ -10,7 +10,7 @@ using SumoTerms;
 class LuaAddonManager
 {
 	private readonly string _addonsDir;
-	readonly List<LuaAddon> _addons = new List<LuaAddon>();
+	readonly List<LuaAddon> _addons = new();
 
 	private readonly Dictionary<string, ILuaApi> _apis;
 
